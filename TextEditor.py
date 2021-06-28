@@ -1,36 +1,32 @@
 # -*- coding: utf-8 -*-
 
-from PySide2.QtWidgets import (QMainWindow, QApplication, QTextEdit, QGridLayout, QWidget)
-import os
 import sys
+from typing import Text
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget
+from PySide2.QtGui import QFont                                                   
+class TextEditor(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-programName = "TextQ"
+        self.initUI()
 
-class TextEditor(QWidget):
+    def initUI(self):
+        TextEdit = QTextEdit()
 
-    def UI(self):
+        mainfont = QFont("メイリオ")
 
-        exitAct = QMainWindow.QAction("&Exit")
-        exitAct.setShortcut("Ctrl+Q")
-        exitAct.triggered.connect(QApplication.quit())
+        TextEdit.setFont(mainfont)
 
-        menu = QMainWindow.menuBar()
-        fileMenu = menu.addMenu("&File")
-        fileMenu.addAction(exitAct)
+        UI = QHBoxLayout()
+        UI.addWidget(TextEdit)
 
-        editor = QTextEdit()
-
-        grid = QGridLayout()
-        grid.setSpacing(10)
-        grid.addWidget(editor,1,0)
-        
-        self.setLayout(grid)
-        self.resize(300, 300)
-        self.setWindowTitle(programName)
+        widget = QWidget(self)
+        widget.setLayout(UI)
+        self.setCentralWidget(widget)
         self.show()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    tq = TextEditor()
+    window = TextEditor()
     sys.exit(app.exec_())
