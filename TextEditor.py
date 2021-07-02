@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from typing import Text
 from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget
-from PySide2.QtGui import QFont                                                   
+from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget, QAction
+from PySide2.QtGui import QFont
+
 class TextEditor(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -12,19 +12,31 @@ class TextEditor(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        TextEdit = QTextEdit()
+        save_act = QAction("Save", self)
+        save_act.triggered.connect(self.save)
 
-        mainfont = QFont("メイリオ")
+        main_font = QFont("メイリオ")
 
-        TextEdit.setFont(mainfont)
+        menu_bar = self.menuBar()
+        menu = menu_bar.addMenu("File")
+        menu.addAction(save_act)
 
-        UI = QHBoxLayout()
-        UI.addWidget(TextEdit)
+
+        textedit = QTextEdit()
+
+        textedit.setFont(main_font)
+
+        ui = QHBoxLayout()
+        ui.addWidget(textedit)
 
         widget = QWidget(self)
-        widget.setLayout(UI)
+        widget.setLayout(ui)
         self.setCentralWidget(widget)
         self.show()
+
+    def save(self):
+        #今度セーブ機能を作る
+        print("セーブボタンが押された")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
