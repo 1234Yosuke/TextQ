@@ -23,12 +23,12 @@ class TextEditor(QMainWindow):
         menu.addAction(save_act)
 
 
-        textedit = QPlainTextEdit()
+        self.textedit = QPlainTextEdit()
 
-        textedit.setFont(main_font)
+        self.textedit.setFont(main_font)
 
         ui = QHBoxLayout()
-        ui.addWidget(textedit)
+        ui.addWidget(self.textedit)
 
         widget = QWidget(self)
         widget.setLayout(ui)
@@ -37,10 +37,10 @@ class TextEditor(QMainWindow):
 
     def keyPressEvent(self, event: QKeyEvent) -> None:
         if (
-            event.modifiters() == Qt.ControlModifier
+            event.modifiers() == Qt.ControlModifier
             and event.key() == Qt.Key_0
         ):
-            self.openFile()
+            self.loadFile()
             return
         elif (
             event.modifiters() == Qt.ControlModifier
@@ -55,7 +55,7 @@ class TextEditor(QMainWindow):
         if not savename:
             return
         with codecs.open(savename, "w", "utf-8") as f:
-            f.write(QPlainTextEdit.toPlainText())
+            f.write(QPlainTextEdit.toPlainText(self.textedit))
     
     def loadFile(self):
         filename = QFileDialog.getOpenFileName(self, "Open", "", "Text Files (*.txt)") [0]
