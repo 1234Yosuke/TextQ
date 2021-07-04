@@ -43,7 +43,7 @@ class TextEditor(QMainWindow):
             self.loadFile()
             return
         elif (
-            event.modifiters() == Qt.ControlModifier
+            event.modifiers() == Qt.ControlModifier
             and event.key() == Qt.Key_S
         ):
             self.saveFile()
@@ -61,8 +61,8 @@ class TextEditor(QMainWindow):
         filename = QFileDialog.getOpenFileName(self, "Open", "", "Text Files (*.txt)") [0]
         if not filename:
             return
-        with open(filename) as f:
-            QPlainTextEdit.setPlainText(f.read())
+        with open(filename,encoding="utf-8") as f:
+            self.textedit.setPlainText(f.read())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
