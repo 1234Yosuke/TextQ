@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import codecs
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget, QAction, QFileDialog
 from PySide2.QtGui import QFont
@@ -35,12 +36,11 @@ class TextEditor(QMainWindow):
         self.show()
 
     def save(self):
-        sevename = QtWidgets.QFileDialog.getSaveFileName(
-            self, "SaveFile", "text.txt")[0]
+        savename = QFileDialog.getSaveFileName(self, "SaveFile", "text.txt") [0]
         if not savename:
             return
         with codecs.open(savename, "w", "utf-8") as f:
-            f.write(self.toPlainText())
+            f.write()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
