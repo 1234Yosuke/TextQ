@@ -2,7 +2,7 @@
 
 import sys
 from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget, QAction
+from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QTextEdit, QWidget, QAction, QFileDialog
 from PySide2.QtGui import QFont
 
 class TextEditor(QMainWindow):
@@ -35,7 +35,12 @@ class TextEditor(QMainWindow):
         self.show()
 
     def save(self):
-        print("セーブボタンが押されました")
+        sevename = QtWidgets.QFileDialog.getSaveFileName(
+            self, "SaveFile", "text.txt")[0]
+        if not savename:
+            return
+        with codecs.open(savename, "w", "utf-8") as f:
+            f.write(self.toPlainText())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
