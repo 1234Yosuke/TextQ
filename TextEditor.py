@@ -16,11 +16,15 @@ class TextEditor(QMainWindow):
         save_act = QAction("Save", self)
         save_act.triggered.connect(self.saveFile)
 
+        load_act = QAction("Open", self)
+        load_act.triggered.connect(self.loadFile)
+
         main_font = QFont("メイリオ")
 
         menu_bar = self.menuBar()
         menu = menu_bar.addMenu("File")
         menu.addAction(save_act)
+        menu.addAction(load_act)
 
 
         self.textedit = QPlainTextEdit()
@@ -38,7 +42,7 @@ class TextEditor(QMainWindow):
     def keyPressEvent(self, event: QKeyEvent) -> None:
         if (
             event.modifiers() == Qt.ControlModifier
-            and event.key() == Qt.Key_0
+            and event.key() == Qt.Key_O
         ):
             self.loadFile()
             return
