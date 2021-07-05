@@ -30,6 +30,8 @@ class TextEditor(QMainWindow):
         self.textedit = QPlainTextEdit()
 
         self.textedit.setFont(main_font)
+        self.textedit.setStyleSheet("color:white; background-color:black;")
+        self.setWindowTitle("新規ファイル - TextQ")
 
         ui = QHBoxLayout()
         ui.addWidget(self.textedit)
@@ -67,6 +69,7 @@ class TextEditor(QMainWindow):
             return
         with open(filename,encoding="utf-8") as f:
             self.textedit.setPlainText(f.read())
+            self.setWindowTitle(filename + " - TextQ")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
