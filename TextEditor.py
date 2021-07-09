@@ -10,18 +10,18 @@ class TextEditor(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.initUI()
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
         save_act = QAction("セーブ", self)
-        save_act.triggered.connect(self.saveFile)
+        save_act.triggered.connect(self.save_file)
 
         load_act = QAction("開く", self)
-        load_act.triggered.connect(self.loadFile)
+        load_act.triggered.connect(self.load_file)
 
 
         github = QAction("GitHub", self)
-        github.triggered.connect(self.GitHubHelp)
+        github.triggered.connect(self.github_help)
 
         main_font = QFont("メイリオ")
 
@@ -48,29 +48,29 @@ class TextEditor(QMainWindow):
         self.setCentralWidget(widget)
         self.show()
 
-    def keyPressEvent(self, event: QKeyEvent) -> None:
+    def key_press_event(self, event: QKeyEvent) -> None:
         if (
             event.modifiers() == Qt.ControlModifier
             and event.key() == Qt.Key_O
         ):
-            self.loadFile()
+            self.load_file()
             return
         elif (
             event.modifiers() == Qt.ControlModifier
             and event.key() == Qt.Key_S
         ):
-            self.saveFile()
+            self.save_file()
             return
-        super().keyPressEvent(event)
+        super().key_press_event(event)
 
-    def saveFile(self):
+    def save_file(self):
         savename = QFileDialog.getSaveFileName(self, "SaveFile", "text.txt", "Text Files (*.txt)") [0]
         if not savename:
             return
         with codecs.open(savename, "w", "utf-8") as f:
             f.write(QPlainTextEdit.toPlainText(self.textedit))
     
-    def loadFile(self):
+    def load_file(self):
         filename = QFileDialog.getOpenFileName(self, "Open", "", "Text Files (*.txt)") [0]
         if not filename:
             return
@@ -78,7 +78,7 @@ class TextEditor(QMainWindow):
             self.textedit.setPlainText(f.read())
             self.setWindowTitle(filename + " - TextQ")
     
-    def GitHubHelp(self):
+    def github_help(self):
         QMessageBox.information(self, "Help", "GitHub repo:\nhttps://github.com/1234Yosuke/TextQ")
 
 if __name__ == "__main__":
