@@ -12,6 +12,8 @@ class TextEditor(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.textedit = QPlainTextEdit()
+
         self.init_ui()
 
     def init_ui(self):
@@ -26,6 +28,9 @@ class TextEditor(QMainWindow):
 
         main_font = QFont("メイリオ")
 
+        self.textedit.setStyleSheet("color:white; background-color:black;")
+        self.textedit.setFont(main_font)
+
         menu_bar = self.menuBar()
         file_menu = menu_bar.addMenu("ファイル")
         file_menu.addAction(save_act)
@@ -34,10 +39,6 @@ class TextEditor(QMainWindow):
         help_menu = menu_bar.addMenu("ヘルプ")
         help_menu.addAction(github)
 
-        self.textedit = QPlainTextEdit()
-
-        self.textedit.setFont(main_font)
-        self.textedit.setStyleSheet("color:white; background-color:black;")
         self.setWindowTitle("新規ファイル - TextQ")
 
         ui = QHBoxLayout()
