@@ -1,4 +1,7 @@
 # TextQ
+## Are you looking for TextP?
+これはTextPの姉妹プロジェクトです。
+TextPのレポジトリーは[こちら](https://github.com/1234Yosuke/TextP)です。
 ## TextQとは
 TextQは、TextPの姉妹エディターで、TextPがTkinterを使用しているのに対し、TextQはPySide(Qt for Python)を使用しています。
 ## 主な機能
@@ -12,3 +15,6 @@ TextPは"普段遣い"用のテキストエディタを目指しているのに�
 - Pythonの実行及びデバッグ
 - 入力補完
 - ファイルのビュー
+## Requiments
+- Python3.6以上
+- PySide2
