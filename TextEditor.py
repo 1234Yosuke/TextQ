@@ -6,6 +6,10 @@ from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPlainTextEdit, QWidget, QAction, QFileDialog, \
     QMessageBox
 from PySide2.QtGui import QFont, QKeyEvent
+import webbrowser
+import pyautogui as pag
+import time
+import requests
 
 class TextEditor(QMainWindow):
     def __init__(self):
@@ -16,7 +20,7 @@ class TextEditor(QMainWindow):
         self.init_ui()
 
     def init_ui(self):
-        save_act = QAction("セーブ", self)
+        save_act = QAction("保存", self)
         save_act.triggered.connect(self.save_file)
 
         load_act = QAction("開く", self)
@@ -24,6 +28,9 @@ class TextEditor(QMainWindow):
 
         github = QAction("GitHub", self)
         github.triggered.connect(self.github_help)
+
+        twitter = QAction("作成者のTwitter", self)
+        twitter.triggered.connect(self.twitter_help)
 
         main_font = QFont("メイリオ")
 
@@ -39,6 +46,7 @@ class TextEditor(QMainWindow):
         # メニューバーにヘルプメニューを追加
         help_menu = menu_bar.addMenu("ヘルプ")
         help_menu.addAction(github)
+        help_menu.addAction(twitter)
 
         # ウィンドウのタイトルを設定
         self.setWindowTitle("新規ファイル - TextQ")
@@ -86,7 +94,12 @@ class TextEditor(QMainWindow):
 
     def github_help(self):
         QMessageBox.information(self, "Help", "GitHub repo:\nhttps://github.com/1234Yosuke/TextQ")
+        webbrowser.open('https://github.com/1234Yosuke/TextQ')
 
+    def twitter_help(self):
+        QMessageBox.information(self, "Help", "作成者のTwitter:\nhttps://twitter.com/ZIP_Muryobochi")
+        webbrowser.open('https://twitter.com/ZIP_Muryobochi')
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = TextEditor()
